@@ -1,0 +1,54 @@
+What we want from a candidate is a simple application as proof of your skills. 
+Note: A BIG plus would be usage of Reactive programming
+
+The main idea is to show a list of users existing in the database and to provide ability to create and edit every user.
+At the top of your test application window there should be a grid where we can see users and their properties, such as:
+-	First Name
+-	Last Name
+-	Country
+-	Subdivision
+-	Location
+
+at the bottom - a set of controls where you fill user's properties.
+Please, add validation mechanism for UI. By validation we mean highlighting controls which failed validation rules. Red border around controls is fine.
+
+Validation rules are:
+-	First Name should not be empty
+-	Last Name should not be empty
+-	Country should not be empty
+
+Mockup for UI can be found in ReferenceData\Documentation.
+The database schema is in ReferenceData.DAL\Models\ReferenceData.sdf or in related *.edmx file.
+
+While working on this test you can
+-	Use the Internet
+-	Google code snippets and use the findings
+-	Use any books and references
+-	Refactor every single aspect of existing solution
+While working on this test you should not use help from others.
+
+What we expect to see from all candidates (Junior and Senior level):
+0.	Publishing your work on GitHub
+1.	Working solution giving the correct results
+2.	You should be able to explain every single line of code
+3.	Well-structured code written to the best standards:
+o	well-formatted code
+o	member names are self-explanatory
+o	code has comments
+o	naming conventions are followed
+
+Implementing following items are required for Senior position applicants and are a big plus for non-Senior candidates:
+
+4.	One of "Defensive programming" approaches is used (manual "If / throw", "Assert" or Code Contracts)
+-	The program should never crash with an unhanded exception displayed directly to the user
+-	Exception-handling should be adequate, but not a "catch and swallow all exceptions" practice
+-	Resilient to Null Reference exceptions
+5.	One of Unit testing approaches is implemented (Unit testing, TDD or BDD)
+6.	Example of Dependency Injection
+-	The "Presentation" code should be separate from the "Business" code, the latter should not depend on the former
+7.	The algorithm is optimized for speed and efficiency (e.g. scalability for a large number of entities
+8.	The solution is safe for use in multi-user, multi-thread environment
+
+Expected completion time for this task is 6-8 hours.
+
+Good luck!

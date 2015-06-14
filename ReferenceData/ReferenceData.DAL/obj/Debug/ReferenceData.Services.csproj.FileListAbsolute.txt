@@ -1,0 +1,9 @@
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\bin\Debug\ReferenceData.sdf
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\bin\Debug\ReferenceData.Services.dll.config
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\bin\Debug\ReferenceData.Services.dll
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\bin\Debug\ReferenceData.Services.pdb
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\bin\Debug\EntityFramework.dll
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\bin\Debug\EntityFramework.xml
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\obj\Debug\ReferenceData.Services.csprojResolveAssemblyReference.cache
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\obj\Debug\ReferenceData.Services.dll
+C:\Users\igor_belousov@epam.com\Documents\Visual Studio 2012\Projects\ReferenceData\ReferenceData.Services\obj\Debug\ReferenceData.Services.pdb

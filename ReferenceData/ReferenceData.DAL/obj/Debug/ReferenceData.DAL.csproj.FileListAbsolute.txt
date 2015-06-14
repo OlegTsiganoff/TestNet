@@ -1,0 +1,8 @@
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\Model\ReferenceData.sdf
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.dll.config
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.dll
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.pdb
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.dll
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.xml
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.dll
+D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.pdb
