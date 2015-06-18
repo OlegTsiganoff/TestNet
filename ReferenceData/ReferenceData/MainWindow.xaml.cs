@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System;
 using System.Windows.Threading;
 using System.Windows.Media;
+using System.Threading.Tasks;
 
 namespace ReferenceData
 {
@@ -50,12 +51,13 @@ namespace ReferenceData
             timer.Elapsed += timer_Elapsed;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            FillDataGrid();
-            FillComboBoxCountry();
-            FillComboBoxSubdivision();
-            FillComboBoxLocation();
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {            
+            await Task.Run(() => FillDataGridAsync());
+            progressBar.Visibility = System.Windows.Visibility.Hidden;
+            await Task.Run(() => FillComboBoxCountryAsync());
+            await Task.Run(() => FillComboBoxSubdivisionAsync());
+            await Task.Run(() => FillComboBoxLocationAsync());
         }
 
         void comboBoxCountry_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -74,7 +76,7 @@ namespace ReferenceData
         }
 
 
-        void FillDataGrid()
+        void FillDataGridAsync()
         {
             var users = new UsersService().GetItemsWithProperties();
 
@@ -91,10 +93,16 @@ namespace ReferenceData
 
             mainViewModel.Users = new System.Collections.ObjectModel.ObservableCollection<UserViewModel>(query.ToList());
 
-            dataGrid.DataContext = mainViewModel.Users;
+            // this code we are calling from another thread
+            // but we can change controls from UI thread only
+            Dispatcher.Invoke((Action)delegate
+            {
+                if (dataGrid != null)
+                    dataGrid.DataContext = mainViewModel.Users;
+            });
         }
 
-        void FillComboBoxCountry()
+        void FillComboBoxCountryAsync()
         {
             var countries = new CountriesService().GetItems();
             var query = from country in countries
@@ -105,21 +113,34 @@ namespace ReferenceData
             CountryViewModel emptycountry = new CountryViewModel();
             mainViewModel.Countries.Insert(0, emptycountry);
 
-            comboBoxCountry.ItemsSource = mainViewModel.Countries;
+            // this code we are calling from another thread
+            // but we can change controls from UI thread only
+            Dispatcher.Invoke((Action)delegate
+            {
+                if (comboBoxCountry != null)
+                    comboBoxCountry.ItemsSource = mainViewModel.Countries;
+            });
         }
 
-        void FillComboBoxSubdivision()
+        void FillComboBoxSubdivisionAsync()
         {
             var subdivisions = new SubdivisionService().GetItems();
             var query = from subdivision in subdivisions
                         select new SubdivisionViewModel() { Id = subdivision.Id, Name = subdivision.Description };
 
             // removing duplicates from collection            
-            mainViewModel.Subdivisions = new System.Collections.ObjectModel.ObservableCollection<SubdivisionViewModel>(query.Distinct().ToList());            
-            comboBoxSubdivision.ItemsSource = mainViewModel.Subdivisions;
+            mainViewModel.Subdivisions = new System.Collections.ObjectModel.ObservableCollection<SubdivisionViewModel>(query.Distinct().ToList());
+
+            // this code we are calling from another thread
+            // but we can change controls from UI thread only
+            Dispatcher.Invoke((Action)delegate
+            {
+                if (comboBoxSubdivision != null)
+                    comboBoxSubdivision.ItemsSource = mainViewModel.Subdivisions;
+            });
         }
 
-        void FillComboBoxLocation()
+        void FillComboBoxLocationAsync()
         {
             var locations = new LocationsService().GetItems();
             var query = from location in locations
@@ -127,7 +148,15 @@ namespace ReferenceData
 
             // removing duplicates from collection 
             mainViewModel.Locations = new System.Collections.ObjectModel.ObservableCollection<LocationViewModel>(query.ToList().Distinct());
-            comboBoxLocation.ItemsSource = mainViewModel.Locations;
+
+
+            // this code we are calling from another thread
+            // but we can change controls from UI thread only
+            Dispatcher.Invoke((Action)delegate
+            {
+                if (comboBoxLocation != null)
+                    comboBoxLocation.ItemsSource = mainViewModel.Locations;
+            });
         }
         
         void dataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -208,7 +237,7 @@ namespace ReferenceData
         }
 
 
-        void buttonNew_Click(object sender, RoutedEventArgs e)
+        async void buttonNew_Click(object sender, RoutedEventArgs e)
         {
             // prepare error message 
             string messageError = ValidateControls();            
@@ -237,9 +266,7 @@ namespace ReferenceData
                 newUser.SubDivisionId = subdivision.Id;
             if(location != null)
                 newUser.LocationId = location.Id;
-            new UsersService().AddOrUpdate(newUser);
-            // refresh data in datagrid
-            FillDataGrid();
+            new UsersService().AddOrUpdate(newUser);          
 
             // show message to inform user that new item successfully created
             txtBlockSuccess.Text = "new data created...";
@@ -249,10 +276,14 @@ namespace ReferenceData
             if(timer == null)
                 InitTimer();
             timer.Start();
-            
+
+            // refresh data in datagrid
+            progressBar.Visibility = System.Windows.Visibility.Visible;
+            await Task.Run(() => FillDataGridAsync());
+            progressBar.Visibility = System.Windows.Visibility.Hidden;            
         }      
 
-        void buttonSave_Click(object sender, RoutedEventArgs e)
+        async void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             // prepare error message             
             string messageError = ValidateControls();
@@ -293,9 +324,7 @@ namespace ReferenceData
                 newUser.LocationId = location.Id;
                 // and add to database
                 new UsersService().AddOrUpdate(newUser);
-                // refresh data in datagrid
-                FillDataGrid();
-
+               
                 // show message to inform user that item successfully saved                
                 txtBlockSuccess.Text = "data saved...";
                 txtBlockSuccess.Visibility = System.Windows.Visibility.Visible;
@@ -304,6 +333,11 @@ namespace ReferenceData
                 if (timer == null)
                     InitTimer();
                 timer.Start();
+
+                // refresh data in datagrid
+                progressBar.Visibility = System.Windows.Visibility.Visible;
+                await Task.Run(() => FillDataGridAsync());
+                progressBar.Visibility = System.Windows.Visibility.Hidden;  
             }            
         }
 
@@ -360,7 +394,7 @@ namespace ReferenceData
         {
             timer.Stop();
             // this code runing from another thread
-            // and we can change controls from UI thread
+            // but we can change controls from UI thread only
             Dispatcher.Invoke((Action)delegate 
             {
                 if (txtBlockSuccess != null)

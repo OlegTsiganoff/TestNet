@@ -6,3 +6,12 @@ D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceDa
 D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.xml
 D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.dll
 D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.pdb
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\Model\ReferenceData.sdf
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.dll.config
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.dll
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.pdb
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.dll
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.xml
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.csprojResolveAssemblyReference.cache
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.dll
+D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.pdb

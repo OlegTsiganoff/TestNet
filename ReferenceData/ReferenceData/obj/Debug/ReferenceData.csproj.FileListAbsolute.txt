@@ -18,3 +18,22 @@ D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceDa
 D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.pdb
 D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Programming\Projects\Visual Studio projects\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData_MarkupCompile.lref
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\ReferenceData.exe.config
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.exe
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.pdb
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\Model\ReferenceData.sdf
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\ReferenceData.exe
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\ReferenceData.pdb
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\ReferenceData.DAL.dll
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\EntityFramework.dll
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\ReferenceData.DAL.pdb
+D:\GitHub\TestNet\ReferenceData\ReferenceData\bin\Debug\EntityFramework.xml
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.csprojResolveAssemblyReference.cache
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\MainWindow.g.cs
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\App.g.cs
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData_MarkupCompile.cache
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData_MarkupCompile.lref
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\MainWindow.baml
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.g.resources
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.Properties.Resources.resources
+D:\GitHub\TestNet\ReferenceData\ReferenceData\obj\Debug\ReferenceData.csproj.GenerateResource.Cache
