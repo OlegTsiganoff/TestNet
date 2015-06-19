@@ -1,16 +1,14 @@
-﻿using System.Windows;
+﻿using ReferenceData.DAL.Model;
 using ReferenceData.DAL.Services;
-using ReferenceData.DAL.Model;
-using System.Data.Objects;
-using System.Linq;
-using System.Collections.Generic;
 using ReferenceData.ViewModels;
-using System.Windows.Data;
-using System.Windows.Controls;
 using System;
-using System.Windows.Threading;
-using System.Windows.Media;
+using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace ReferenceData
 {
@@ -52,12 +50,13 @@ namespace ReferenceData
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
-        {            
-            await Task.Run(() => FillDataGridAsync());
+        {
+            // run asynchronously for non-blocking UI
+            await FillDataGridAsync();
             progressBar.Visibility = System.Windows.Visibility.Hidden;
-            await Task.Run(() => FillComboBoxCountryAsync());
-            await Task.Run(() => FillComboBoxSubdivisionAsync());
-            await Task.Run(() => FillComboBoxLocationAsync());
+            await FillComboBoxCountryAsync();
+            await FillComboBoxSubdivisionAsync();
+            await FillComboBoxLocationAsync();
         }
 
         void comboBoxCountry_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -75,87 +74,98 @@ namespace ReferenceData
             }
         }
 
-
-        void FillDataGridAsync()
+        Task FillDataGridAsync()
         {
-            var users = new UsersService().GetItemsWithProperties();
+            return Task.Run(() =>
+                {
+                    var users = new UsersService().GetItemsWithProperties();
 
-            var query = from user in users
-                        select new UserViewModel()
-                        {
-                            Id = user.Id,
-                            FirstName = user.FirstName,
-                            SecondName = user.SecondName,
-                            Country = user.Country.Description,
-                            Subdivision = user.Subdivision == null ? null : user.Subdivision.Description,   // field can be empty
-                            Location = user.Location == null ? null : user.Location.Description             // field can be empty
-                        };
+                    var query = from user in users
+                                select new UserViewModel()
+                                {
+                                    Id = user.Id,
+                                    FirstName = user.FirstName,
+                                    SecondName = user.SecondName,
+                                    Country = user.Country.Description,
+                                    Subdivision = user.Subdivision == null ? null : user.Subdivision.Description,   // field can be empty
+                                    Location = user.Location == null ? null : user.Location.Description             // field can be empty
+                                };
 
-            mainViewModel.Users = new System.Collections.ObjectModel.ObservableCollection<UserViewModel>(query.ToList());
+                    mainViewModel.Users = new System.Collections.ObjectModel.ObservableCollection<UserViewModel>(query.ToList());
 
-            // this code we are calling from another thread
-            // but we can change controls from UI thread only
-            Dispatcher.Invoke((Action)delegate
+                    // this code we are calling from another thread
+                    // but we can change controls from UI thread only
+                    Dispatcher.Invoke((Action)delegate
+                    {
+                        if (dataGrid != null)
+                            dataGrid.DataContext = mainViewModel.Users;
+                    });
+                });
+        }
+
+        Task FillComboBoxCountryAsync()
+        {
+            return Task.Run(() =>
             {
-                if (dataGrid != null)
-                    dataGrid.DataContext = mainViewModel.Users;
+                var countries = new CountriesService().GetItems();
+                var query = from country in countries
+                            select new CountryViewModel() { Id = country.Id, Name = country.Description };
+                mainViewModel.Countries = new System.Collections.ObjectModel.ObservableCollection<CountryViewModel>(query.ToList());
+
+                // adding empty field to coolection for ability to select empty item in Country combobox
+                CountryViewModel emptycountry = new CountryViewModel();
+                mainViewModel.Countries.Insert(0, emptycountry);
+
+                // this code we are calling from another thread
+                // but we can change controls from UI thread only
+                Dispatcher.Invoke((Action)delegate
+                {
+                    if (comboBoxCountry != null)
+                        comboBoxCountry.ItemsSource = mainViewModel.Countries;
+                });
             });
         }
 
-        void FillComboBoxCountryAsync()
+        Task FillComboBoxSubdivisionAsync()
         {
-            var countries = new CountriesService().GetItems();
-            var query = from country in countries
-                         select new CountryViewModel() { Id = country.Id, Name = country.Description };
-            mainViewModel.Countries = new System.Collections.ObjectModel.ObservableCollection<CountryViewModel>(query.ToList());
-
-            // adding empty field to coolection for ability to select empty item in Country combobox
-            CountryViewModel emptycountry = new CountryViewModel();
-            mainViewModel.Countries.Insert(0, emptycountry);
-
-            // this code we are calling from another thread
-            // but we can change controls from UI thread only
-            Dispatcher.Invoke((Action)delegate
+            return Task.Run(() =>
             {
-                if (comboBoxCountry != null)
-                    comboBoxCountry.ItemsSource = mainViewModel.Countries;
+                var subdivisions = new SubdivisionService().GetItems();
+                var query = from subdivision in subdivisions
+                            select new SubdivisionViewModel() { Id = subdivision.Id, Name = subdivision.Description };
+
+                // removing duplicates from collection            
+                mainViewModel.Subdivisions = new System.Collections.ObjectModel.ObservableCollection<SubdivisionViewModel>(query.Distinct().ToList());
+
+                // this code we are calling from another thread
+                // but we can change controls from UI thread only
+                Dispatcher.Invoke((Action)delegate
+                {
+                    if (comboBoxSubdivision != null)
+                        comboBoxSubdivision.ItemsSource = mainViewModel.Subdivisions;
+                });
             });
         }
 
-        void FillComboBoxSubdivisionAsync()
+        Task FillComboBoxLocationAsync()
         {
-            var subdivisions = new SubdivisionService().GetItems();
-            var query = from subdivision in subdivisions
-                        select new SubdivisionViewModel() { Id = subdivision.Id, Name = subdivision.Description };
-
-            // removing duplicates from collection            
-            mainViewModel.Subdivisions = new System.Collections.ObjectModel.ObservableCollection<SubdivisionViewModel>(query.Distinct().ToList());
-
-            // this code we are calling from another thread
-            // but we can change controls from UI thread only
-            Dispatcher.Invoke((Action)delegate
+            return Task.Run(() =>
             {
-                if (comboBoxSubdivision != null)
-                    comboBoxSubdivision.ItemsSource = mainViewModel.Subdivisions;
-            });
-        }
+                var locations = new LocationsService().GetItems();
+                var query = from location in locations
+                            select new LocationViewModel() { Id = location.Id, Name = location.Description };
 
-        void FillComboBoxLocationAsync()
-        {
-            var locations = new LocationsService().GetItems();
-            var query = from location in locations
-                        select new LocationViewModel() { Id = location.Id, Name = location.Description };
-
-            // removing duplicates from collection 
-            mainViewModel.Locations = new System.Collections.ObjectModel.ObservableCollection<LocationViewModel>(query.ToList().Distinct());
+                // removing duplicates from collection 
+                mainViewModel.Locations = new System.Collections.ObjectModel.ObservableCollection<LocationViewModel>(query.ToList().Distinct());
 
 
-            // this code we are calling from another thread
-            // but we can change controls from UI thread only
-            Dispatcher.Invoke((Action)delegate
-            {
-                if (comboBoxLocation != null)
-                    comboBoxLocation.ItemsSource = mainViewModel.Locations;
+                // this code we are calling from another thread
+                // but we can change controls from UI thread only
+                Dispatcher.Invoke((Action)delegate
+                {
+                    if (comboBoxLocation != null)
+                        comboBoxLocation.ItemsSource = mainViewModel.Locations;
+                });
             });
         }
         
@@ -279,7 +289,7 @@ namespace ReferenceData
 
             // refresh data in datagrid
             progressBar.Visibility = System.Windows.Visibility.Visible;
-            await Task.Run(() => FillDataGridAsync());
+            await FillDataGridAsync();
             progressBar.Visibility = System.Windows.Visibility.Hidden;            
         }      
 
@@ -304,7 +314,7 @@ namespace ReferenceData
             if (user == null || country == null || subdivision == null || location == null)
                 return;
 
-            // if we didn't change data do nothing
+            // if we didn't change data - do nothing
             if (user.FirstName.Equals(txtBoxFirstName.Text) &&
                 user.SecondName.Equals(txtBoxSecondName.Text) &&
                 user.Country.Equals(country.Name) &&
@@ -336,7 +346,7 @@ namespace ReferenceData
 
                 // refresh data in datagrid
                 progressBar.Visibility = System.Windows.Visibility.Visible;
-                await Task.Run(() => FillDataGridAsync());
+                await FillDataGridAsync();
                 progressBar.Visibility = System.Windows.Visibility.Hidden;  
             }            
         }

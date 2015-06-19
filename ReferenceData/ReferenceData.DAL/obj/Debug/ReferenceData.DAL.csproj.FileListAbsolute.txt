@@ -15,3 +15,12 @@ D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.xml
 D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.csprojResolveAssemblyReference.cache
 D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.dll
 D:\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.pdb
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\Model\ReferenceData.sdf
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.dll.config
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.dll
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\ReferenceData.DAL.pdb
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.dll
+C:\Users\Пользователь\Documents\GitHub\TestNet\ReferenceData\ReferenceData.DAL\obj\Debug\ReferenceData.DAL.pdb
